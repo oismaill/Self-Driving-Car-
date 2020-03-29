@@ -41,7 +41,7 @@ TextView msg;
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-             //Mahmoud shal sara w rmaha 3al 7eta
+             //Sarah Hates Mahmouddddd
             }
         });
 
