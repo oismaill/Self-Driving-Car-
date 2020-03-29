@@ -54,39 +54,6 @@ public class RequestApi {
         VolleySingleton.getnInstance(context).addRequestQue(stringRequest);
     }
 
-    public void reportApi(final VolleyCallBack callback, final String tableName, Map<String, String> conditions) {
-
-        Gson gson = new Gson();
-        final String con = gson.toJson(conditions);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "", new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                callback.onSuccess(response);
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        callback.onError(error);
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> param = new HashMap<String, String>();
-                param.put("table", tableName);
-                param.put("conditions", con);
-
-                return param;
-            }
-        };
-
-        VolleySingleton.getnInstance(context).addRequestQue(stringRequest);
-    }
-
     public void insertApi(final VolleyCallBack callback, final String tableName, Map<String, String> data) {
 
         Gson gson = new Gson();
@@ -157,22 +124,6 @@ public class RequestApi {
         VolleySingleton.getnInstance(context).addRequestQue(stringRequest);
 
     }
-
-    /*public static void jsonToMap(String t) throws JSONException {
-
-        HashMap<String, String> map = new HashMap<String, String>();
-        JSONObject jObject = new JSONObject(t);
-        Iterator<?> keys = jObject.keys();
-
-        while (keys.hasNext()) {
-            String key = (String) keys.next();
-            String value = jObject.getString(key);
-            map.put(key, value);
-        }
-
-        System.out.println("json : " + jObject);
-        System.out.println("map : " + map);
-    }*/
 
 }
 

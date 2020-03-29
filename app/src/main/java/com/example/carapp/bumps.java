@@ -41,7 +41,7 @@ TextView msg;
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-             //Sarah Hates Mahmouddddd
+
             }
         });
 
