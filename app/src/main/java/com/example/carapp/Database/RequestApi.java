@@ -26,7 +26,7 @@ public class RequestApi {
         Gson gson = new Gson();
         final String con = gson.toJson(conditions);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "C:/xampp/htdocs/Selfdrivingcar/select.php", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -60,7 +60,7 @@ public class RequestApi {
         final String insert_data = gson.toJson(data);
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,"", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,"C:/xampp/htdocs/Selfdrivingcar/insert.php", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -96,7 +96,7 @@ public class RequestApi {
         final String insert_data = gson.toJson(conditions);
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "C:/xampp/htdocs/Selfdrivingcar/delete.php", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
