@@ -26,6 +26,7 @@ public class UserModel {
     public UserModel(Context context) {
         this.requestApi = new RequestApi(context);
         this.usertypeModel = new UsertypeModel(context);
+        this.carmodel  = new CarModel(context);
     }
 
     public void selectSingleUser(Map<String, String> con, final LoginCallBack loginCallBack){
@@ -42,15 +43,15 @@ public class UserModel {
                         loginCallBack.onFailer(obj.getString("message"));
                     }
                     else{
-                        JSONArray arr = new JSONArray(obj.getJSONArray("User")); // array of json object
+                        JSONArray arr = new JSONArray(obj.getJSONArray("users")); // array of json object
                         final JSONObject userObject = (JSONObject) arr.get(0);
 
                         final User user = new User();
                         user.setId(userObject.getInt("ID"));
-                        user.setFirstName(userObject.getString("firstname"));
-                        user.setLastName(userObject.getString("lastname"));
-                        user.setEmail(userObject.getString("email"));
-                        user.setPassword(userObject.getString("password"));
+                        user.setFirstName(userObject.getString("Firstname"));
+                        user.setLastName(userObject.getString("Lastname"));
+                        user.setEmail(userObject.getString("Email"));
+                        user.setPassword(userObject.getString("Password"));
 
                         // usertype object .. car
                         final Map<String, String> conUT = null;
@@ -104,7 +105,7 @@ public class UserModel {
             public void onError(Throwable throwable) {
                 loginCallBack.onFailer(throwable.getMessage());
             }
-        }, "User", con);
+        }, "users", con);
 
     }
 }

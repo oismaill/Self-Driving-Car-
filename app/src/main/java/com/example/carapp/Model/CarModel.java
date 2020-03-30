@@ -6,6 +6,7 @@ import com.example.carapp.Controller.CallBacks.SelectCarCallBack;
 import com.example.carapp.Controller.CallBacks.SelectUsertypeCallBack;
 import com.example.carapp.Database.RequestApi;
 import com.example.carapp.Database.VolleyCallBack;
+import com.example.carapp.Entites.Anomaly;
 import com.example.carapp.Entites.Car;
 import com.example.carapp.Entites.User;
 import com.example.carapp.Entites.UserType;
@@ -46,25 +47,7 @@ public class CarModel {
                         car.setSerialNumber(userObject.getString("SerialNumber"));
                        // car.setAnomaly();
 
-                       /* Map<String, String> conUT = null;
-                        conUT.put("ID", String.valueOf(userObject.getInt("UsertypeID")));
-                        usertypeModel.selectUsertype(conUT, new SelectUsertypeCallBack() {
-                            @Override
-                            public void onSuccess(UserType userType) {
-                                user.setUsertype(userType);
-
-                                // car
-
-                                loginCallBack.onSuccess(user);
-                            }
-
-                            @Override
-                            public void onFailer(String error) {
-                                loginCallBack.onFailer(error);
-                            }
-                        });*/
-
-
+                        //getAllAnomalies(car, selectCarCallBack);
 
                         selectCarCallBack.onSuccess(car);
                     }
@@ -81,6 +64,7 @@ public class CarModel {
             }
         }, "car", con);
     }
+
 }
 
 

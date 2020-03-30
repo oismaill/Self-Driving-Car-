@@ -1,10 +1,12 @@
 package com.example.carapp.Entites;
 
+import java.util.ArrayList;
+
 public class Car {
 
     private int id;
     private String serialNumber;
-    private Anomaly anomaly;
+    private ArrayList<Anomaly> anomalies;
 
     public int getId() {
         return id;
@@ -22,11 +24,11 @@ public class Car {
         this.serialNumber = serialNumber;
     }
 
-    public Anomaly getAnomaly() {
-        return anomaly;
+    public ArrayList<Anomaly> getAnomalies() {
+        return anomalies;
     }
 
-    public void setAnomaly(Anomaly anomaly) {
-        this.anomaly = anomaly;
+    public void setAnomalies(ArrayList<Anomaly> anomalies) {
+        this.anomalies = anomalies;
     }
 }
