@@ -6,6 +6,7 @@ public class Car {
 
     private int id;
     private String serialNumber;
+    private String modelName;
     private ArrayList<Anomaly> anomalies;
 
     public int getId() {
@@ -30,5 +31,13 @@ public class Car {
 
     public void setAnomalies(ArrayList<Anomaly> anomalies) {
         this.anomalies = anomalies;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 }

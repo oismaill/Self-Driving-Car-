@@ -7,6 +7,7 @@ import com.example.carapp.Controller.CallBacks.LoginCallBack;
 import com.example.carapp.Entites.User;
 import com.example.carapp.Model.UserModel;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class UserController {
@@ -19,9 +20,10 @@ public class UserController {
 
     public void userLogin(String email, String pass, final LoginCallBack loginCallBack){ // call interface C - V
 
-        Map<String, String> con = null; // 3shan a7ot el haga fe key(Name) w value(sara) -- quary automatic created
+        HashMap<String, String> con = new HashMap<>(); // 3shan a7ot el haga fe key(Name) w value(sara) -- quary automatic created
         con.put("email", email);
         con.put("password", pass);
+        con.put("isdeleted", "0");
 
         // select * from Users where ""email"" = email
 

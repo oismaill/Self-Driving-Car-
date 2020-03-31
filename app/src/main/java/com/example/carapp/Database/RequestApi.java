@@ -21,12 +21,12 @@ public class RequestApi {
         this.context = context;
     }
 
-    public void selectApi(final VolleyCallBack callback, final String tableName, Map<String, String> conditions) {
+    public void selectApi(final VolleyCallBack callback, final String tableName, HashMap<String, String> conditions) {
 
         Gson gson = new Gson();
         final String con = gson.toJson(conditions);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "C:/xampp/htdocs/Selfdrivingcar/select.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://selfdrivingcarserver.000webhostapp.com/select.php", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -54,13 +54,13 @@ public class RequestApi {
         VolleySingleton.getnInstance(context).addRequestQue(stringRequest);
     }
 
-    public void insertApi(final VolleyCallBack callback, final String tableName, Map<String, String> data) {
+    public void insertApi(final VolleyCallBack callback, final String tableName, HashMap<String, String> data) {
 
         Gson gson = new Gson();
         final String insert_data = gson.toJson(data);
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,"C:/xampp/htdocs/Selfdrivingcar/insert.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://selfdrivingcarserver.000webhostapp.com/insert.php", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -88,15 +88,15 @@ public class RequestApi {
         VolleySingleton.getnInstance(context).addRequestQue(stringRequest);
     }
 
-    public void updateApi(final String tableName, Map<String, String> data, Map<String, String> conditions) {}
+    public void updateApi(final String tableName, Map<String, String> data, HashMap<String, String> conditions) {}
 
-    public void deleteApi(final VolleyCallBack callback, final String tableName, Map<String, String> conditions) {
+    public void deleteApi(final VolleyCallBack callback, final String tableName, HashMap<String, String> conditions) {
 
         Gson gson = new Gson();
         final String insert_data = gson.toJson(conditions);
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "C:/xampp/htdocs/Selfdrivingcar/delete.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://selfdrivingcarserver.000webhostapp.com/delete.php", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class UserModel {
@@ -29,12 +30,12 @@ public class UserModel {
         this.carmodel  = new CarModel(context);
     }
 
-    public void selectSingleUser(Map<String, String> con, final LoginCallBack loginCallBack){
+    public void selectSingleUser(HashMap<String, String> con, final LoginCallBack loginCallBack){
 
         requestApi.selectApi(new VolleyCallBack() {
             @Override
             public void onSuccess(String result) {
-
+System.out.println(result);
                 try {
                     JSONObject obj = new JSONObject(result);
                     // error, meessage , array
@@ -43,7 +44,7 @@ public class UserModel {
                         loginCallBack.onFailer(obj.getString("message"));
                     }
                     else{
-                        JSONArray arr = new JSONArray(obj.getJSONArray("users")); // array of json object
+                        JSONArray arr = obj.getJSONArray("users"); // array of json object
                         final JSONObject userObject = (JSONObject) arr.get(0);
 
                         final User user = new User();
@@ -54,7 +55,7 @@ public class UserModel {
                         user.setPassword(userObject.getString("Password"));
 
                         // usertype object .. car
-                        final Map<String, String> conUT = null;
+                        final HashMap<String, String> conUT = new HashMap<>();
                         conUT.put("ID", String.valueOf(userObject.getInt("UsertypeID")));
                         usertypeModel.selectUsertype(conUT, new SelectUsertypeCallBack() {
                             @Override
@@ -63,7 +64,7 @@ public class UserModel {
 
                                 // start:: car
 
-                                Map<String, String> conCar = null;
+                                HashMap<String, String> conCar = new HashMap<>();
                                 try {
                                     conCar.put("ID", String.valueOf(userObject.getInt("CarID")));
                                 } catch (JSONException e) {

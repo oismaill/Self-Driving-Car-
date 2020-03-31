@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class UsertypeModel {
@@ -22,11 +23,11 @@ public class UsertypeModel {
         this.requestApi = new RequestApi(context);
     }
 
-    public void selectUsertype(Map<String, String> con, final SelectUsertypeCallBack selectUsertypeCallBack){
+    public void selectUsertype(HashMap<String, String> con, final SelectUsertypeCallBack selectUsertypeCallBack){
         requestApi.selectApi(new VolleyCallBack() {
             @Override
             public void onSuccess(String result) {
-
+                System.out.println(result);
                 try {
                     JSONObject obj = new JSONObject(result);
                     // error, meessage , array
@@ -35,11 +36,11 @@ public class UsertypeModel {
                         selectUsertypeCallBack.onFailer(obj.getString("message"));
                     }
                     else{
-                        JSONArray arr = new JSONArray(obj.getJSONArray("usertype")); // array of json object
+                        JSONArray arr = obj.getJSONArray("usertype"); // array of json object
                         JSONObject userObject = (JSONObject) arr.get(0);
 
                         UserType userType = new UserType();
-                        userType.setId(userObject.getInt("id"));
+                        userType.setId(userObject.getInt("ID"));
                         userType.setUserTypeName(userObject.getString("usertypename"));
 
                         selectUsertypeCallBack.onSuccess(userType);

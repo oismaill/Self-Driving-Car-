@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CarModel {
@@ -26,11 +27,11 @@ public class CarModel {
         this.requestApi = new RequestApi(context);
     }
 
-    public void selectCar(Map<String, String> con, final SelectCarCallBack selectCarCallBack){
+    public void selectCar(HashMap<String, String> con, final SelectCarCallBack selectCarCallBack){
         requestApi.selectApi(new VolleyCallBack() {
             @Override
             public void onSuccess(String result) {
-
+                System.out.println(result);
                 try {
                     JSONObject obj = new JSONObject(result);
                     // error, meessage , array
@@ -39,13 +40,13 @@ public class CarModel {
                         selectCarCallBack.onFailer(obj.getString("message"));
                     }
                     else{
-                        JSONArray arr = new JSONArray(obj.getJSONArray("car")); // array of json object
+                        JSONArray arr = obj.getJSONArray("car"); // array of json object
                         JSONObject userObject = (JSONObject) arr.get(0);
 
                         Car car = new Car();
-                        car.setId(userObject.getInt("id"));
-                        car.setSerialNumber(userObject.getString("SerialNumber"));
-                       // car.setAnomaly();
+                        car.setId(userObject.getInt("ID"));
+                        car.setSerialNumber(userObject.getString("SerialNum"));
+                        car.setModelName(userObject.getString("ModelName"));
 
                         //getAllAnomalies(car, selectCarCallBack);
 
