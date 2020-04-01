@@ -37,7 +37,7 @@ public class RequestApi {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        callback.onError(error);
+                        callback.onError(error.getMessage());
                     }
                 }
         ) {
@@ -71,7 +71,7 @@ public class RequestApi {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        callback.onError(error);
+                        callback.onError(error.getMessage());
                     }
                 }
         ) {
@@ -107,7 +107,7 @@ public class RequestApi {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        callback.onError(error);
+                        callback.onError(error.getMessage());
                     }
                 }
         ) {

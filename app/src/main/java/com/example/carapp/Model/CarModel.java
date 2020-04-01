@@ -60,8 +60,8 @@ public class CarModel {
             }
 
             @Override
-            public void onError(Throwable throwable) {
-                selectCarCallBack.onFailer(throwable.getMessage());
+            public void onError(String error) {
+                selectCarCallBack.onFailer(error);
             }
         }, "car", con);
     }

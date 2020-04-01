@@ -62,28 +62,8 @@ System.out.println(result);
                             public void onSuccess(UserType userType) {
                                 user.setUsertype(userType);
 
-                                // start:: car
 
-                                HashMap<String, String> conCar = new HashMap<>();
-                                try {
-                                    conCar.put("ID", String.valueOf(userObject.getInt("CarID")));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                carmodel.selectCar(conCar, new SelectCarCallBack() {
-                                    @Override
-                                    public void onSuccess(Car car) {
-                                        user.setUserCar(car);
-                                        loginCallBack.onSuccess(user);
-                                    }
-
-                                    @Override
-                                    public void onFailer(String error) {
-                                        loginCallBack.onFailer(error);
-                                    }
-                                });
-
-                                // end:: car
+                               loginCallBack.onSuccess(user);
                             }
 
                             @Override
@@ -103,10 +83,11 @@ System.out.println(result);
             }
 
             @Override
-            public void onError(Throwable throwable) {
-                loginCallBack.onFailer(throwable.getMessage());
+            public void onError(String error) {
+                loginCallBack.onFailer(error);
             }
         }, "users", con);
 
     }
+
 }

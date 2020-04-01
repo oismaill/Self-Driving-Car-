@@ -53,8 +53,8 @@ public class UsertypeModel {
             }
 
             @Override
-            public void onError(Throwable throwable) {
-                selectUsertypeCallBack.onFailer(throwable.getMessage());
+            public void onError(String error) {
+                selectUsertypeCallBack.onFailer(error);
             }
         }, "usertype", con);
     }

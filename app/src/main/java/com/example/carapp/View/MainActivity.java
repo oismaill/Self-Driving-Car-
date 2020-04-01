@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(User user) {
                 if(user.getUsertype().getId() == 1){ // admin
-
+                    Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                    startActivity(intent);
                 }else{ // driver
                     Intent intent = new Intent(getApplicationContext(), DriverActivity.class);
                     startActivity(intent);

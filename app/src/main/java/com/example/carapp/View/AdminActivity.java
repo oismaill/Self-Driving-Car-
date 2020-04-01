@@ -1,0 +1,44 @@
+package com.example.carapp.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.carapp.Controller.UserController;
+import com.example.carapp.Database.VolleyCallBack;
+import com.example.carapp.R;
+
+public class AdminActivity extends AppCompatActivity {
+    private EditText driverFN, driverLN, driverEmail;
+    private Button addBTN;
+
+    private UserController userController;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_admin);
+
+        userController = new UserController(this);
+
+        driverFN = (EditText) findViewById(R.id.driverFirstname);
+        driverLN = (EditText) findViewById(R.id.driverLasttname);
+        driverEmail = (EditText) findViewById(R.id.driverEmail);
+
+        addBTN = findViewById(R.id.addBTN);
+
+        //validation = true
+        addBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+    }
+
+
+}

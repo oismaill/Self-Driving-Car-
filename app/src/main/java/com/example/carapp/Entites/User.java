@@ -1,13 +1,14 @@
 package com.example.carapp.Entites;
 
-public class User {
+import java.util.ArrayList;
 
+public class User {
     private int id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-    private Car userCar;
+    private ArrayList<Car> userCars = new ArrayList<>();
     private UserType usertype;
 
     public int getId() {
@@ -50,19 +51,19 @@ public class User {
         this.password = password;
     }
 
-    public Car getUserCar() {
-        return userCar;
-    }
-
-    public void setUserCar(Car userCar) {
-        this.userCar = userCar;
-    }
-
     public UserType getUsertype() {
         return usertype;
     }
 
     public void setUsertype(UserType usertype) {
         this.usertype = usertype;
+    }
+
+    public ArrayList<Car> getUserCars() {
+        return userCars;
+    }
+
+    public void setUserCars(ArrayList<Car> userCars) {
+        this.userCars = userCars;
     }
 }
