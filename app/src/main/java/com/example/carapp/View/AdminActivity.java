@@ -45,12 +45,12 @@ public class AdminActivity extends AppCompatActivity {
         userController.insertUser(firstName, lastName, email, new VolleyCallBack() {
             @Override
             public void onSuccess(String result) {
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(String error) {
-                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
             }
         });
 

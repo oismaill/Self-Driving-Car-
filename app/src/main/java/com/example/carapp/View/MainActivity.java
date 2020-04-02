@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailer(String error) {
-                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
             }
         });
 

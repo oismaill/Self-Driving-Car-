@@ -68,6 +68,7 @@ System.out.println(result);
 
                             @Override
                             public void onFailer(String error) {
+
                                 loginCallBack.onFailer(error);
                             }
                         });
