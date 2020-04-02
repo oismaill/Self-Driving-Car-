@@ -34,11 +34,25 @@ public class AdminActivity extends AppCompatActivity {
         addBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                addDriver(driverFN.getText().toString(), driverLN.getText().toString(), driverEmail.getText().toString());
             }
         });
 
     }
 
+    private void addDriver(String firstName, String lastName, String email){
 
+        userController.insertUser(firstName, lastName, email, new VolleyCallBack() {
+            @Override
+            public void onSuccess(String result) {
+                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG);
+            }
+        });
+
+    }
 }

@@ -42,4 +42,26 @@ public class UserController {
 
     }
 
+    public void insertUser(String firstName, String lastName, String email, final VolleyCallBack insertCallBack){
+
+        HashMap<String, String> con = new HashMap<>();
+        con.put("Firstname", firstName);
+        con.put("Lastname", lastName);
+        con.put("Email", email);
+        con.put("Password", "12345"); // auto generated later
+        con.put("UsertypeID", "2");
+
+        userModel.insertUser(con, new VolleyCallBack() {
+            @Override
+            public void onSuccess(String result) {
+                insertCallBack.onSuccess(result);
+            }
+
+            @Override
+            public void onError(String error) {
+                insertCallBack.onError(error);
+            }
+        });
+
+    }
 }

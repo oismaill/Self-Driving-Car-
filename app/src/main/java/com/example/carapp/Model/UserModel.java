@@ -90,4 +90,33 @@ System.out.println(result);
 
     }
 
+    public void insertUser(HashMap<String, String> con, final VolleyCallBack insertCallBack ){
+
+        requestApi.insertApi(new VolleyCallBack() {
+            @Override
+            public void onSuccess(String result) {
+
+                System.out.println(result);
+
+                try {
+                    JSONObject object = new JSONObject(result);
+
+                    if(object.getBoolean("error")){
+                        insertCallBack.onError(object.getString("message")); //check 3al db
+                    }else{
+                        insertCallBack.onSuccess(object.getString("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                insertCallBack.onError(error);//network,API
+            }
+        }, "users",con);
+
+    }
 }

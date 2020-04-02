@@ -59,6 +59,8 @@ public class RequestApi {
         Gson gson = new Gson();
         final String insert_data = gson.toJson(data);
 
+        System.out.println(insert_data);
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,"https://selfdrivingcarserver.000webhostapp.com/insert.php", new Response.Listener<String>() {
 
@@ -80,6 +82,8 @@ public class RequestApi {
                 Map<String, String> param = new HashMap<String, String>();
                 param.put("table", tableName);
                 param.put("data", insert_data);
+
+                System.out.println(param);
 
                 return param;
             }
