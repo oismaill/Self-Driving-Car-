@@ -14,9 +14,12 @@ import com.example.carapp.Controller.UserController;
 import com.example.carapp.Entites.User;
 import com.example.carapp.R;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
     private Button loginBTN;
     private EditText emailET, passwordET;
+
     private UserController userController;
 
     @Override
@@ -33,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
         loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login(emailET.getText().toString(), passwordET.getText().toString());
+               login(emailET.getText().toString(), passwordET.getText().toString());
+               // Toast.makeText(getApplicationContext(), getRandomString(10), Toast.LENGTH_LONG).show();
+
             }
         });
     }
@@ -59,5 +64,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
+
 
 }

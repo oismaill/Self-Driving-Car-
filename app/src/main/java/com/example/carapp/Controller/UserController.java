@@ -10,10 +10,12 @@ import com.example.carapp.Model.UserModel;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class UserController {
 
     private UserModel userModel;
+    private static final String ALLOWED_CHARACTERS ="0123456789qwertyuiopasdfghjklzxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*_-.";
 
     public UserController(Context context) {
         this.userModel = new UserModel(context);
@@ -48,7 +50,7 @@ public class UserController {
         con.put("Firstname", firstName);
         con.put("Lastname", lastName);
         con.put("Email", email);
-        con.put("Password", "12345"); // auto generated later
+        con.put("Password", generatePassword(10)); // auto generated later
         con.put("UsertypeID", "2");
 
         userModel.insertUser(con, new VolleyCallBack() {
@@ -63,5 +65,14 @@ public class UserController {
             }
         });
 
+    }
+    private static String generatePassword(final int passwordSize){
+        final Random random=new Random();
+        final StringBuilder sb=new StringBuilder(passwordSize);
+
+        for(int i=0;i<passwordSize;++i){
+            sb.append(ALLOWED_CHARACTERS.charAt(random.nextInt(ALLOWED_CHARACTERS.length())));
+        }
+        return sb.toString();
     }
 }

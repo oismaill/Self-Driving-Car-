@@ -61,8 +61,6 @@ System.out.println(result);
                             @Override
                             public void onSuccess(UserType userType) {
                                 user.setUsertype(userType);
-
-
                                loginCallBack.onSuccess(user);
                             }
 
