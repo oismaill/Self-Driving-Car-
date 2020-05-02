@@ -50,9 +50,11 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(User user) {
                 if(user.getUsertype().getId() == 1){ // admin
                     Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                    baseProfile.user=user;
                     startActivity(intent);
                 }else{ // driver
                     Intent intent = new Intent(getApplicationContext(), DriverActivity.class);
+                    baseProfile.user=user;
                     startActivity(intent);
                 }
             }

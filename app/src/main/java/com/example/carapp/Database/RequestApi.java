@@ -92,18 +92,18 @@ public class RequestApi {
         VolleySingleton.getnInstance(context).addRequestQue(stringRequest);
     }
 
-    public void updateApi(final String tableName, Map<String, String> data, HashMap<String, String> conditions) {}
-
-    public void deleteApi(final VolleyCallBack callback, final String tableName, HashMap<String, String> conditions) {
-
+    public void updateApi(final VolleyCallBack callback, final String tableName, Map<String, String> data, HashMap<String, String> conditions) {
         Gson gson = new Gson();
-        final String insert_data = gson.toJson(conditions);
+        final String update_data = gson.toJson(data);
+        final String update_con = gson.toJson(conditions);
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://selfdrivingcarserver.000webhostapp.com/delete.php", new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, "https://selfdrivingcarserver.000webhostapp.com/update.php", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
+                System.out.println(response);
+
                 callback.onSuccess(response);
             }
         },
@@ -119,15 +119,17 @@ public class RequestApi {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param = new HashMap<String, String>();
                 param.put("table", tableName);
-                param.put("data", insert_data);
+                param.put("data", update_data);
+                param.put("conditions", update_con);
 
                 return param;
             }
         };
 
-        VolleySingleton.getnInstance(context).addRequestQue(stringRequest);
+        VolleySingleton.getnInstance(context).addRequestQue(request);
 
     }
+
 
 }
 

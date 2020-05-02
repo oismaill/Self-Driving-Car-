@@ -118,4 +118,30 @@ System.out.println(result);
         }, "users",con);
 
     }
+
+    public void updateUser(HashMap<String, String> con, HashMap<String, String> data,final VolleyCallBack updateCallBack ){
+        requestApi.updateApi(new VolleyCallBack() {
+            @Override
+            public void onSuccess(String result) {
+
+                try {
+                    JSONObject object = new JSONObject(result);
+
+                    if(object.getBoolean("error")){
+                        updateCallBack.onError(object.getString("message"));
+                    }else{
+                        updateCallBack.onSuccess(object.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String reason) {
+                updateCallBack.onError(reason);
+            }
+        },"users",data,con);
+
+    }
 }

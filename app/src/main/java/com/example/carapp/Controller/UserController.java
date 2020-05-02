@@ -75,4 +75,21 @@ public class UserController {
         }
         return sb.toString();
     }
+
+    public void updateUser(HashMap<String, String>update, int Userid, final VolleyCallBack updateCallBack){
+        HashMap<String, String> conditions = new HashMap<>();
+        conditions.put("id", String.valueOf(Userid));
+
+        userModel.updateUser(update, conditions, new VolleyCallBack()   {
+            @Override
+            public void onSuccess(String success) {
+                updateCallBack.onSuccess(success);
+            }
+
+            @Override
+            public void onError(String reason) {
+                updateCallBack.onError(reason);
+            }
+        });
+    }
 }
