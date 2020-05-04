@@ -13,6 +13,7 @@ import com.example.carapp.Controller.CallBacks.LoginCallBack;
 import com.example.carapp.Controller.UserController;
 import com.example.carapp.Entites.User;
 import com.example.carapp.R;
+import com.example.carapp.SendMail;
 
 import java.io.Serializable;
 import java.util.Random;
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                login(emailET.getText().toString(), passwordET.getText().toString());
                // Toast.makeText(getApplicationContext(), getRandomString(10), Toast.LENGTH_LONG).show();
+                SendMail sm = new SendMail(v.getContext(), "Sara1603573@miuegypt.edu.eg", "TestMail", "This mail is from 7oda <3 ... tmm........");
+                //Executing sendmail to send email
+                sm.execute();
 
             }
         });
