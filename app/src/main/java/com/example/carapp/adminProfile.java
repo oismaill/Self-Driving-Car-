@@ -15,6 +15,9 @@ public class adminProfile extends baseProfile {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_profile);
         this.context=getApplicationContext();
+
+        this.user = (User) getIntent().getSerializableExtra("User");
+
         setBasicSettings();
         displayProfileData();
     }

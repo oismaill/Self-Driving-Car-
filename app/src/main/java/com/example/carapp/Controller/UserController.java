@@ -76,11 +76,11 @@ public class UserController {
         return sb.toString();
     }
 
-    public void updateUser(HashMap<String, String>update, int Userid, final VolleyCallBack updateCallBack){
+    public void updateUser(HashMap<String, String>data, int Userid, final VolleyCallBack updateCallBack){
         HashMap<String, String> conditions = new HashMap<>();
         conditions.put("id", String.valueOf(Userid));
 
-        userModel.updateUser(update, conditions, new VolleyCallBack()   {
+        userModel.updateUser(conditions, data, new VolleyCallBack()   {
             @Override
             public void onSuccess(String success) {
                 updateCallBack.onSuccess(success);

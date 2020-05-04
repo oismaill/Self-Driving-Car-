@@ -14,6 +14,7 @@ import com.example.carapp.Controller.UserController;
 import com.example.carapp.Entites.User;
 import com.example.carapp.R;
 
+import java.io.Serializable;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,13 +50,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(User user) {
                 if(user.getUsertype().getId() == 1){ // admin
-                    Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
-                    baseProfile.user=user;
-                    startActivity(intent);
+                    Intent intent1 = new Intent(getApplicationContext(), AdminActivity.class);
+                    intent1.putExtra("User", (Serializable) user);
+                    startActivity(intent1);
                 }else{ // driver
-                    Intent intent = new Intent(getApplicationContext(), DriverActivity.class);
-                    baseProfile.user=user;
-                    startActivity(intent);
+                    Intent intent2 = new Intent(getApplicationContext(), DriverActivity.class);
+                    intent2.putExtra("User", (Serializable) user);
+                    startActivity(intent2);
                 }
             }
 

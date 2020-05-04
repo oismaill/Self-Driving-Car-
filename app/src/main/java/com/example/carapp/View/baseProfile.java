@@ -24,7 +24,7 @@ public abstract class baseProfile extends AppCompatActivity implements View.OnCl
     public HashMap<String, String> userHashmap = new HashMap<>();
     protected Context context;
     private UserController userController;
-    public static User user;
+    protected User user;
 
     protected void setBasicSettings(){
 
@@ -33,11 +33,12 @@ public abstract class baseProfile extends AppCompatActivity implements View.OnCl
     }
     protected abstract void initViews();
     private void initAllViews() {
-
         firstNameET = findViewById(R.id.userFirstname);
         lastNameET = findViewById(R.id.userLasttname);
         emailET = findViewById(R.id.userEmail);
         passET = findViewById(R.id.userPassword);
+        saveBTN = findViewById(R.id.button_save);
+        saveBTN.setOnClickListener(this);
         initViews();
         displayUserProfileData();
     }
@@ -45,9 +46,6 @@ public abstract class baseProfile extends AppCompatActivity implements View.OnCl
 
     protected abstract void validateChange();
     private void validateMainChange() {
-
-
-
         firstNameET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -105,9 +103,9 @@ public abstract class baseProfile extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-
-        updateUserProfileData();
-
+        if(v.getId() == R.id.button_save){
+            updateUserProfileData();
+        }
     }
 
 
@@ -122,9 +120,8 @@ public abstract class baseProfile extends AppCompatActivity implements View.OnCl
 
     public abstract void updateProfileData();
     private void updateUserProfileData(){
-
-
         if(!userHashmap.isEmpty()){
+            System.out.println(userHashmap.size());
             userController.updateUser(userHashmap, user.getId(), new VolleyCallBack() {
                 @Override
                 public void onSuccess(String success) {
