@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.carapp.Controller.CallBacks.LoginCallBack;
 import com.example.carapp.Controller.CallBacks.SelectCarCallBack;
+import com.example.carapp.Controller.CallBacks.SelectUsersListCallBack;
 import com.example.carapp.Controller.CallBacks.SelectUsertypeCallBack;
 import com.example.carapp.Database.RequestApi;
 import com.example.carapp.Database.VolleyCallBack;
@@ -15,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,6 +91,73 @@ System.out.println(result);
 
     }
 
+    public void selectUsersList(HashMap<String, String> con, final SelectUsersListCallBack selectUsersListCallBack){
+
+        requestApi.selectApi(new VolleyCallBack() {
+            @Override
+            public void onSuccess(String result) {
+                System.out.println(result);
+                try {
+                    final ArrayList<User> userArrayList = new ArrayList<>();
+                    JSONObject obj = new JSONObject(result);
+                    // error, meessage , array
+
+                    if(obj.getBoolean("error")){
+                        selectUsersListCallBack.onError(obj.getString("message"));
+                    }
+                    else{
+                        JSONArray arr = obj.getJSONArray("users"); // array of json object
+
+                        for(int i =0; i < arr.length(); i++){
+                            final JSONObject userObject = (JSONObject) arr.get(i);
+                            final User user = new User();
+                            user.setId(userObject.getInt("ID"));
+                            user.setFirstName(userObject.getString("Firstname"));
+                            user.setLastName(userObject.getString("Lastname"));
+                            user.setEmail(userObject.getString("Email"));
+                            user.setPassword(userObject.getString("Password"));
+
+                            // usertype object .. car
+                            final HashMap<String, String> conUT = new HashMap<>();
+                            conUT.put("ID", String.valueOf(userObject.getInt("UsertypeID")));
+                            usertypeModel.selectUsertype(conUT, new SelectUsertypeCallBack() {
+                                @Override
+                                public void onSuccess(UserType userType) {
+                                    user.setUsertype(userType);
+                                    userArrayList.add(user);
+                                    selectUsersListCallBack.onSuccess(userArrayList);
+                                }
+
+                                @Override
+                                public void onFailer(String error) {
+
+                                    selectUsersListCallBack.onError(error);
+                                }
+                            });
+
+
+                        }
+
+
+
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(String error) {
+                selectUsersListCallBack.onError(error);
+            }
+        }, "users", con);
+
+    }
+
     public void insertUser(HashMap<String, String> con, final VolleyCallBack insertCallBack ){
 
         requestApi.insertApi(new VolleyCallBack() {
@@ -104,6 +173,7 @@ System.out.println(result);
                         insertCallBack.onError(object.getString("message")); //check 3al db
                     }else{
                         insertCallBack.onSuccess(object.getString("message"));
+
                     }
 
                 } catch (JSONException e) {

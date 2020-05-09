@@ -4,10 +4,12 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.carapp.Controller.CallBacks.LoginCallBack;
+import com.example.carapp.Controller.CallBacks.SelectUsersListCallBack;
 import com.example.carapp.Database.VolleyCallBack;
 import com.example.carapp.Entites.User;
 import com.example.carapp.Model.UserModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -89,6 +91,24 @@ public class UserController {
             @Override
             public void onError(String reason) {
                 updateCallBack.onError(reason);
+            }
+        });
+    }
+
+    public void selectUserList(final SelectUsersListCallBack selectUsersListCallBack){
+        HashMap<String, String> conditions = new HashMap<>();
+        conditions.put("Isdeleted","0");
+        conditions.put("UsertypeID", "2");
+
+        userModel.selectUsersList(conditions, new SelectUsersListCallBack()   {
+            @Override
+            public void onSuccess(ArrayList<User> arrayList) {
+                selectUsersListCallBack.onSuccess(arrayList);
+            }
+
+            @Override
+            public void onError(String reason) {
+                selectUsersListCallBack.onError(reason);
             }
         });
     }

@@ -13,7 +13,6 @@ import com.example.carapp.Controller.CallBacks.LoginCallBack;
 import com.example.carapp.Controller.UserController;
 import com.example.carapp.Entites.User;
 import com.example.carapp.R;
-import com.example.carapp.SendMail;
 
 import java.io.Serializable;
 import java.util.Random;
