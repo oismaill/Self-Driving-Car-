@@ -15,9 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Reports"></activity>
-        <activity android:name=".adminProfile" />
-        <activity android:name=".driverProfile" />
+       <!--  <activity android:name=".View.Reports"></activity> -->
+        <activity android:name=".View.adminProfile" />
+        <activity android:name=".View.DriverList" />
+        <activity android:name=".View.AddDriver" />
+        <activity android:name=".View.driverProfile" />
         <activity android:name=".View.AdminActivity" />
         <activity android:name=".View.DriverActivity" />
         <activity android:name=".distance" />

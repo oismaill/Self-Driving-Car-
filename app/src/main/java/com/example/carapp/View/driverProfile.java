@@ -1,19 +1,20 @@
-package com.example.carapp;
+package com.example.carapp.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
 
 import com.example.carapp.Entites.User;
+import com.example.carapp.R;
 import com.example.carapp.View.baseProfile;
 
-public class adminProfile extends baseProfile {
+public class driverProfile extends baseProfile {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_profile);
+        setContentView(R.layout.activity_driver_profile);
         this.context=getApplicationContext();
 
         this.user = (User) getIntent().getSerializableExtra("User");
@@ -21,7 +22,6 @@ public class adminProfile extends baseProfile {
         setBasicSettings();
         displayProfileData();
     }
-
 
     @Override
     protected void initViews() {
