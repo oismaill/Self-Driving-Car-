@@ -1,6 +1,9 @@
 package com.example.carapp.Model;
 
 import android.content.Context;
+import android.provider.ContactsContract;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.carapp.Controller.CallBacks.LoginCallBack;
 import com.example.carapp.Controller.CallBacks.SelectCarCallBack;
@@ -11,6 +14,7 @@ import com.example.carapp.Database.VolleyCallBack;
 import com.example.carapp.Entites.Car;
 import com.example.carapp.Entites.User;
 import com.example.carapp.Entites.UserType;
+import com.example.carapp.SendMail;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,8 +29,10 @@ public class UserModel {
     RequestApi requestApi;
     UsertypeModel usertypeModel;
     CarModel carmodel;
+    private Context context;
 
     public UserModel(Context context) {
+        this.context = context;
         this.requestApi = new RequestApi(context);
         this.usertypeModel = new UsertypeModel(context);
         this.carmodel  = new CarModel(context);
@@ -158,20 +164,36 @@ System.out.println(result);
 
     }
 
-    public void insertUser(HashMap<String, String> con, final VolleyCallBack insertCallBack ){
+    public void insertUser(final HashMap<String, String> con, final VolleyCallBack insertCallBack ){
 
         requestApi.insertApi(new VolleyCallBack() {
             @Override
             public void onSuccess(String result) {
 
-                System.out.println(result);
+                System.out.println("Heyy "+result);
 
                 try {
                     JSONObject object = new JSONObject(result);
 
+
                     if(object.getBoolean("error")){
                         insertCallBack.onError(object.getString("message")); //check 3al db
+                        System.out.println("IM ERROR 7ODA");
+
                     }else{
+                        System.out.println("IM CORRECT 7ODA");
+                        System.out.println(con.get("Email"));
+
+                        // System.out.println(object.toString());
+
+                        String mail=con.get("Email");
+                        String pass = con.get("Password");
+                        String name = con.get("Firstname");
+                        System.out.println(object.toString());
+                        //System.out.println("IM HERE 7ODA");
+
+                        SendMail Passmail = new SendMail(context, mail, "TestMail", "Welcome "+name+ ", Your password is '" +pass+"'");
+                        Passmail.execute();
                         insertCallBack.onSuccess(object.getString("message"));
 
                     }

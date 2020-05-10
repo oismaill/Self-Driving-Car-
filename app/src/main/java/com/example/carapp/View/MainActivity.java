@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                login(emailET.getText().toString(), passwordET.getText().toString());
                // Toast.makeText(getApplicationContext(), getRandomString(10), Toast.LENGTH_LONG).show();
-                //SendMail sm = new SendMail(v.getContext(), "Sara1603573@miuegypt.edu.eg", "TestMail", "This mail is from 7oda <3 ... tmm........");
+                //SendMail Passmail = new SendMail(v.getContext(), "Sara1603573@miuegypt.edu.eg", "TestMail", "This mail is from 7oda  ... hhh........");
                 //Executing sendmail to send email
                 //sm.execute();
 
