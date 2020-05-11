@@ -14,7 +14,7 @@ import com.example.carapp.bumps;
 import java.io.Serializable;
 
 public class DriverActivity extends AppCompatActivity {
-    private Button bumpsBTN, distanceBTN,profileBTN;
+    private Button bumpsBTN, distanceBTN,profileBTN, reportsBTN;
     private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +23,10 @@ public class DriverActivity extends AppCompatActivity {
         this.user = (User) getIntent().getSerializableExtra("User");
 
         setContentView(R.layout.activity_driver);
-        bumpsBTN = (Button) findViewById(R.id.bumps);
-        distanceBTN = (Button) findViewById(R.id.distance);
-        profileBTN = (Button) findViewById(R.id.profileBTN);
+        bumpsBTN =  findViewById(R.id.bumps);
+        reportsBTN = findViewById(R.id.reports);
+        distanceBTN = findViewById(R.id.distance);
+        profileBTN =  findViewById(R.id.profileBTN);
         bumpsBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +56,11 @@ public class DriverActivity extends AppCompatActivity {
     }
     public void openProfile(){
         Intent intent = new Intent(this, driverProfile.class);
+        intent.putExtra("User", (Serializable) this.user);
+        startActivity(intent);
+    }
+    public void openReports(){
+        Intent intent = new Intent(this, Reports.class);
         intent.putExtra("User", (Serializable) this.user);
         startActivity(intent);
     }

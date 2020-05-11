@@ -35,8 +35,6 @@ public class Reports extends AppCompatActivity {
         BarData data = new BarData(set1);
         chart.setData(data);
 
-
-
     }
 
 }
