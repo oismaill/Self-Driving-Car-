@@ -8,5 +8,6 @@
 <com.github.mikephil.charting.charts.HorizontalBarChart
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/chart1"></com.github.mikephil.charting.charts.HorizontalBarChart>
+    android:maxHeight="20dp"
+    android:id="@+id/chart1"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

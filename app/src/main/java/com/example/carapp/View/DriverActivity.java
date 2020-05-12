@@ -16,12 +16,12 @@ import java.io.Serializable;
 public class DriverActivity extends AppCompatActivity {
     private Button bumpsBTN, distanceBTN,profileBTN, reportsBTN;
     private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         this.user = (User) getIntent().getSerializableExtra("User");
-
         setContentView(R.layout.activity_driver);
         bumpsBTN =  findViewById(R.id.bumps);
         reportsBTN = findViewById(R.id.reports);
@@ -33,10 +33,17 @@ public class DriverActivity extends AppCompatActivity {
                 openbumps();
             }
         });
+
         distanceBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 opendistance();
+            }
+        });
+        reportsBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openReports();
             }
         });
         profileBTN.setOnClickListener(new View.OnClickListener() {
@@ -60,8 +67,9 @@ public class DriverActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void openReports(){
+        Integer UserID = this.user.getId();
         Intent intent = new Intent(this, Reports.class);
-        intent.putExtra("User", (Serializable) this.user);
+        intent.putExtra("UserID", UserID );
         startActivity(intent);
     }
 

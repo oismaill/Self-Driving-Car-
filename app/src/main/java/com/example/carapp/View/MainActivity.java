@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(getApplicationContext(), AdminActivity.class);
                     intent1.putExtra("User", (Serializable) user);
                     startActivity(intent1);
-                }else{ // driver
+                }else{ // driverذذ1
                     Intent intent2 = new Intent(getApplicationContext(), DriverActivity.class);
                     intent2.putExtra("User", (Serializable) user);
                     startActivity(intent2);
