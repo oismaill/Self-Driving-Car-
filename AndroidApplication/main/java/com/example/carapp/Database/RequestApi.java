@@ -135,16 +135,21 @@ public class RequestApi {
         Gson gson = new Gson();
         final String con = gson.toJson(conditions);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://selfdrivingcarserver.000webhostapp.com/select.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://selfdrivingcarserver.000webhostapp.com/selectreport.php", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 callback.onSuccess(response);
+                //System.out.println("HH Positive Response");
+                //System.out.println(response);
+
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        //System.out.println("HH Negative Response");
+
                         error.printStackTrace();
                         callback.onError(error.getMessage());
                     }
