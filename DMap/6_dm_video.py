@@ -127,7 +127,6 @@ for frame in camera.capture_continuous(capture, format="bgra", use_video_port=Tr
     cv2.imshow("right", imgRight)    
 
     t2 = datetime.now()
-    #print ("DM build time: " + str(t2-t1))
     
 
     
