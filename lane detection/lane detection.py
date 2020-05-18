@@ -24,7 +24,7 @@ camera = PiCamera()
 camera.resolution = (640, 480)
 camera.framerate = 50
 camera.vflip = True
-# camera.crop=(0.5,0.0,0.,0.0)
+
 rawCapture = PiRGBArray(camera, size=(640, 480))
 time.sleep(0.1)
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
