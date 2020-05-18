@@ -126,7 +126,7 @@ for frame in camera.capture_continuous(capture, format="bgra", use_video_port=Tr
     cv2.imshow("left", imgLeft)
     cv2.imshow("right", imgRight)    
 
-    t2 = datetime.now()
+    
     
 
     
