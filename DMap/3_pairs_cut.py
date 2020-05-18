@@ -1,7 +1,7 @@
 import cv2
 import os
 
-# Global variables preset
+
 total_photos = 60
 photo_width = 640
 photo_height = 240
@@ -10,7 +10,7 @@ img_width = 320
 photo_counter = 0
 
 
-# Main pair cut cycle
+
 if (os.path.isdir("./pairs")==False):
     os.makedirs("./pairs")
 while photo_counter != total_photos:
