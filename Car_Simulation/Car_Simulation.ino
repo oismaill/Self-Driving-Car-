@@ -4,6 +4,8 @@
 #define LB 11                             //  LB \/  \/ RB
 
 int Direction;                            //Int to store the input signal from Rx.
+int LastDirection;            
+
 
 // speed must be in the range of  0 - 255. as it is serial communication of 8 bits 
 int speedup=150;
@@ -21,9 +23,15 @@ void setup() {
 }
 
 void loop() {
-  
+//  Forward();                     //just for check the anomaly detection
+  delay(200);
   if (Serial.available() > 0) {
     Direction = Serial.read();
+    if(LastDirection!=Direction)
+    {
+      Stop();
+      delay(200);
+    }
     switch (Direction) {
       case 'F':
         Forward();
@@ -39,18 +47,19 @@ void loop() {
         break;
     }
   }
+  LastDirection=Direction;
 }
 void Forward(){
-  analogWrite(RF, Speed);
+  analogWrite(RF, Speed+15);
   analogWrite(LF, Speed);
 }
 void Leftt(){
   analogWrite(LF, speedup);
-  analogWrite(RF, slowdown);
+  analogWrite(RF, slowdown+15);
 }
 void Rightt(){
   analogWrite(LF, slowdown);
-  analogWrite(RF, speedup);
+  analogWrite(RF, speedup+15);
 }
 void Stop()  {
   analogWrite(RF, 0);
