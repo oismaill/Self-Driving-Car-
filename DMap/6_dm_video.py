@@ -1,16 +1,37 @@
+# Copyright (C) 2019 Eugene Pomazov, <stereopi.com>, virt2real team
+#
+# This file is part of StereoPi tutorial scripts.
+#
+# StereoPi tutorial is free software: you can redistribute it 
+# and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3 of the 
+# License, or (at your option) any later version.
+#
+# StereoPi tutorial is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with StereoPi tutorial.  
+# If not, see <http://www.gnu.org/licenses/>.
+#
+# Most of this code is updated version of 3dberry.org project by virt2real
+# 
+# Thanks to Adrian and http://pyimagesearch.com, as there are lot of
+# code in this tutorial was taken from his lessons.
+# 
+
+
 from picamera import PiCamera
 import time
 import cv2
 import numpy as np
 import json
-import os
 from stereovision.calibration import StereoCalibrator
 from stereovision.calibration import StereoCalibration
 from datetime import datetime
-
-
-
-imgcounter=0
+from matplotlib import pyplot as plt
 # Depth map default preset
 SWS = 5
 PFS = 5
@@ -44,7 +65,9 @@ print ("Scaled image resolution: "+str(img_width)+" x "+str(img_height))
 camera = PiCamera(stereo_mode='side-by-side',stereo_decimate=False)
 camera.resolution=(cam_width, cam_height)
 camera.framerate = 20
-camera.vflip = True
+camera.hflip = False
+camera.vflip = True 
+
 
 # Implementing calibration data
 print('Read calibration data and rectifying stereo pair...')
@@ -62,7 +85,7 @@ cv2.moveWindow("right", 850,100)
 disparity = np.zeros((img_width, img_height), np.uint8)
 sbm = cv2.StereoBM_create(numDisparities=0, blockSize=21)
 
-def stereo_depth_map(rectified_pair,imgcounter):
+def stereo_depth_map(rectified_pair):
     dmLeft = rectified_pair[0]
     dmRight = rectified_pair[1]
     disparity = sbm.compute(dmLeft, dmRight)
@@ -70,18 +93,12 @@ def stereo_depth_map(rectified_pair,imgcounter):
     local_min = disparity.min()
     disparity_grayscale = (disparity-local_min)*(65535.0/(local_max-local_min))
     disparity_fixtype = cv2.convertScaleAbs(disparity_grayscale, alpha=(255.0/65535.0))
-    disparity_color = cv2.applyColorMap(disparity_fixtype, cv2.COLORMAP_JET)
-    cv2.imshow("Image", disparity_color)
+    #disparity_color = cv2.applyColorMap(disparity_fixtype, cv2.COLORMAP_JET)
+    cv2.imshow("Image", disparity_fixtype)
     key = cv2.waitKey(1) & 0xFF   
     if key == ord("q"):
         quit();
-    if key == ord("s") :
-        if (os.path.isdir("./distances")==False):
-            os.makedirs("./distances")   
-        filename = './distances/distances'+'_'+\
-                  str(imgcounter) + '.png'
-        cv2.imwrite(filename, disparity_color)
-    return disparity_color
+    return disparity_fixtype
 
 def load_map_settings( fName ):
     global SWS, PFS, PFC, MDS, NOD, TTH, UR, SR, SPWS, loading_settings
@@ -115,24 +132,29 @@ load_map_settings ("3dmap_set.txt")
 
 # capture frames from the camera
 for frame in camera.capture_continuous(capture, format="bgra", use_video_port=True, resize=(img_width,img_height)):
-    t1 = datetime.now()
+    #t1 = datetime.now()
     pair_img = cv2.cvtColor (frame, cv2.COLOR_BGR2GRAY)
     imgLeft = pair_img [0:img_height,0:int(img_width/2)] #Y+H and X+W
     imgRight = pair_img [0:img_height,int(img_width/2):img_width] #Y+H and X+W
     rectified_pair = calibration.rectify((imgLeft, imgRight))
-    disparity = stereo_depth_map(rectified_pair,imgcounter)
-    imgcounter=imgcounter+1
+    disparity = stereo_depth_map(rectified_pair)
+    hist = cv2.calcHist([disparity],[0],None,[250],[1,250])
+    for px in range(0,240):
+        if (hist[px]>[200.]):
+            if (px + 1 < 100):
+                print("stop")
+                break
+            elif(px + 1 < 200):
+                print("slow down")
+                break
+            else:
+                print("speed up")
+                break
     # show the frame
     cv2.imshow("left", imgLeft)
     cv2.imshow("right", imgRight)    
 
-    
-    
-
-    
-    
-
-    
-
+    #t2 = datetime.now()
+    #print ("DM build time: " + str(t2-t1))
 
 
